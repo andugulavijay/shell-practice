@@ -2,3 +2,4 @@
 
 echo "All variables passed to the scripe: $@"
 echo "NUmber of variables passed: $#"
+echo "Script name: $0"
