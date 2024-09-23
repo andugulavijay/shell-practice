@@ -5,14 +5,21 @@ USERID=$(id -u)
 
 VALIDATE(){
     echo "exit status: $1"
+    then
+        echo "Command is..FAILED"
+        exit 1
+    else
+        echo "Command is FAILED"
+    fi        
 }
 
-# if [ $USERID -ne 0 ]
-# then
-#     echo "please run this script with root priveleges"
-# fi
+if [ $USERID -ne 0 ]
+then
+    echo "please run this script with root priveleges"
+    exit 1
+fi
 
-# dnf list installed git
+dnf list installed git
 
 # VALIDATE $?
 
