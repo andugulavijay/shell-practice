@@ -8,8 +8,9 @@ N="\e[0m"
 CHECK_ROOT(){
     if [ $USERID -ne 0 ]
     then
-        echo "please run this script with root privelages"
+        echo "Please run this script with root priveleges"
         exit 1
+    fi
 }
 
 VALIDATE(){
@@ -25,7 +26,7 @@ VALIDATE(){
 CHECK_ROOT
 
 # sh 15-loops.sh git mysql postfix nginx
-for package in $@ # $@ is refers to all arguments passed to it
+for package in $@ # $@ refers to all arguments passed to it
 do
     echo $package
 done    
