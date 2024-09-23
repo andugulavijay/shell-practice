@@ -23,10 +23,10 @@ CHECK_ROOT(){
 VALIDATE(){
     if [ $1 -ne 0 ]
     then
-        echo -e "$2 is...$R FAILED $N" &>>$LOG_FILE | tee -a $LOG_FILE
+        echo -e "$2 is...$R FAILED $N"  | tee -a $LOG_FILE
         exit 1
     else
-        echo -e "$2 is... $G SUCCESS $N" &>>$LOG_FILE | tee -a $LOG_FILE
+        echo -e "$2 is... $G SUCCESS $N"  | tee -a $LOG_FILE
     fi
 }
 
@@ -47,13 +47,13 @@ fi
 
 for package in $@ # $@ refers to all arguments passed to it
 do
-    dnf list installed $package &>>$LOG_FILE | tee -a $LOG_FILE
+    dnf list installed $package  | tee -a $LOG_FILE
     if [ $? -ne 0 ]
     then 
-        echo "$package is not installed, going to install it.." &>>$LOG_FILE | tee -a $LOG_FILE
-        dnf install $package -y &>>$LOG_FILE | tee -a &>>$LOG_FILE
+        echo "$package is not installed, going to install it.."  | tee -a $LOG_FILE
+        dnf install $package -y  | tee -a 
         VALIDATE $? "Installing $package"
     else
-        echo -e "$package is already $Y installed..nothing to do $N" &>>$LOG_FILE | tee -a $LOG_FILE
+        echo -e "$package is already $Y installed..nothing to do $N"  | tee -a $LOG_FILE
     fi        
 done  
