@@ -31,10 +31,29 @@ fi
 
 FILES=$(find ${SOURCE_DIR} _name "*.log" -mtime +14)
 
-if [ -n $FILES ]
+echo "Files: $FILES
+
+if [ ! -z $FILES ] #true if files is empty, ! makes it expression false
 then 
     echo "Files are found"
+    ZIP_FILE="$DEST_DIR/app-logs-$TIMESTAMP.zip
+    find ${SOURCE_DIR} -name "*log" -mtime +14 | zip "$ZIP_FILE" -@
+    
+    #check if zip file is successfully created or not
+    if [ -f $ZIP_FILE ]
+    then
+        echo "successfully zipped files older than $DAYS
+
+        #remove the files after zipping
+        while IFS= read -r file,internal field separator, empty it will ignore while space
+        do 
+            echo "Deleting file: $FILE"
+            rm -rf $file
+        done <<< $FILES    
+    else
+        echo "Zipping the files is failed"
+        exit 1    
+    fi    
 else 
     echo "No files older than $DAYS"
 fi
-        
